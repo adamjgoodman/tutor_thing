@@ -45,6 +45,21 @@ class MoviesController < ApplicationController
       flash[:notice] = "Movie '#{@movie.title}' deleted."
       redirect_to movies_path
     end
+
+    def search_me
+      Movie.search_me(params)
+    end
+
+    def do_search
+      @movies = Movie.search(params)
+      @all_ratings = Movie.all_ratings
+      @ratings_to_show_hash = ratings_hash
+      @sort_by = sort_by
+      # remember the correct settings for next time
+      session['ratings'] = ratings_list
+      session['sort_by'] = @sort_by
+      render "movies/index"
+    end
     
     private
   
