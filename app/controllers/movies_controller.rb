@@ -46,10 +46,6 @@ class MoviesController < ApplicationController
       redirect_to movies_path
     end
 
-    def search_me
-      Movie.search_me(params)
-    end
-
     def do_search
       @movies = Movie.search(params)
       @all_ratings = Movie.all_ratings
